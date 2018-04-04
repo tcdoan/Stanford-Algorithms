@@ -15,6 +15,7 @@ int main()
 
 	// w[i] is the weight corresponding to vertex i. 
 	vector<uint64_t> w;
+	w.emplace_back(0);
 	for (int i = 0; i < N; i++)
 	{
 		uint64_t x;
@@ -23,36 +24,35 @@ int main()
 	}
 
 	// a[i] is the total maximum-weight independent set of path graph 1, 2, ..i.
-	vector<uint64_t> a(N);
-	a[0] = 0;
-	a[1] = w[0];
+	vector<uint64_t> a(N+1);
+	a[0] = w[0];
+	a[1] = w[1];
+
 	for (int i = 2; i < N; i++)
 	{
 		a[i] = max(a[i - 1], a[i - 2] + w[i]);
 	}
 
-	// s[i] indicates if vertex i is part of the solition.
-	// I.e. s[i] = true -> i is part of the maximum-weight independent set.
-	vector<bool> s(N);
-	int i = N - 1;
-	while (i > 1)
+	vector<int> s;
+	int i = N;
+	while (i > 0)
 	{
-		if (a[i - 1] >= a[i - 2] + w[i])
+		if (i>1 && a[i - 1] >= a[i - 2] + w[i])
 		{
-			i = i - 1;
+			i--;
 		}
 		else
 		{
-			s[i] = true;
-			i = i - 2;
+			s.emplace_back(i);
+			i -= 2;
 		}
 	}
 
 	// Check if vertices 1, 2, 3, 4, 17, 117, 517, and 997 are part of the solution
 	vector<int> idx({1, 2, 3, 4, 17, 117, 517, 997 });
-	for (int k : idx)
+	for (int v : idx)
 	{
-		if (s[k - 1]) cout << "1";
+		if (find(s.begin(), s.end(), v) != s.end()) cout << "1";
 		else cout << "0";
 	}
 	cout << endl;
