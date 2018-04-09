@@ -30,7 +30,6 @@ int main()
 	for (int i = 0; i <= N; i++)
 	{
 		a[i] = vector<int64_t>(capcity + 1);
-		a[i][0] = 0;
 	}
 
 	for (int x = 0; x <= capcity; x++)
@@ -42,13 +41,13 @@ int main()
 	{
 		for (int x = 0; x <= capcity; x++)
 		{
-			if (x - items[i].weight >= 0)
+			if (x - items[i-1].weight >= 0)
 			{
-				a[i][x] = max(a[i - 1][x], a[i-1][x-items[i].weight] + items[i].value);
+				a[i][x] = max(a[i-1][x], a[i-1][x-items[i-1].weight] + items[i-1].value);
 			}
 			else
 			{
-				a[i][x] = a[i - 1][x];
+				a[i][x] = a[i-1][x];
 			}
 		}
 	}
