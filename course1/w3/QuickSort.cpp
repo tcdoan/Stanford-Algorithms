@@ -15,7 +15,7 @@ int FindMedianIndex(vector<int> &a, int lo, int hi) {
   // median = max(min(a,b), min(max(a,b),c));
   int median = max(min(a[lo], a[mid]), min(max(a[lo], a[mid]), a[hi]));
 
-  // median_index;
+  // median index;
   if (a[lo] == median)
     return lo;
   if (a[mid] == median)

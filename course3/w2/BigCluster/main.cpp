@@ -12,7 +12,7 @@ const int N = 24;
 
 int main()
 {
-	ifstream ifs("D:\\repos\\algorithm\\course3\\w2\\clustering_big.txt",ifstream::in);
+	ifstream ifs("D:\\repos\\algorithm\\course3\\w2\\clustering_big.txt", ifstream::in);
 	int V;
 	ifs >> V;
 	
@@ -27,7 +27,7 @@ int main()
 		numbers.insert(stoi(line, nullptr, 2));
 	}
 
-	cout << "Done insertion" << endl;
+	cout << "Done insertion." << endl;
 	unordered_map<int, int> numToId;
 
 	int Id = 0;
@@ -62,5 +62,5 @@ int main()
 		}
 	}
 
-	cout <<  "Clusters : " << uf.Clusters() << endl;
+	cout <<  "Clusters: " << uf.Clusters() << endl;
 }
